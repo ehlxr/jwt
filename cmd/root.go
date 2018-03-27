@@ -37,7 +37,7 @@ var rootCmd = &cobra.Command{
 	Short: "JWT(Json Web Token) 工具",
 	Long: `JWT(Json Web Token) 工具
 用于生成、验证、查看 JWT`,
-	Version: "v0.0.1",
+	Version: "v0.0.2",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
