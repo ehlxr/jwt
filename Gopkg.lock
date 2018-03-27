@@ -70,14 +70,14 @@
   version = "v1.7.6"
 
 [[projects]]
+  branch = "master"
   name = "github.com/manifoldco/promptui"
   packages = [
     ".",
     "list",
     "screenbuf"
   ]
-  revision = "f6438f6153008ee1b9ba5446d5333bbe63b622b7"
-  version = "v0.2.1"
+  revision = "c0c0d3afc6a03bcb5c1df10b70b862a650db9f9b"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -125,10 +125,10 @@
   version = "v1.2.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
-  version = "v0.0.1"
+  revision = "a1f051bc3eba734da4772d60e2d677f47cf93ef4"
 
 [[projects]]
   branch = "master"
@@ -176,6 +176,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0a938a511eb543614b64dfd3af17775ff0da8175339e2da9fbb7ebe7069793e5"
+  inputs-digest = "8464d599dcf135d93620269e89212e2950fd6ae460f52366e646fea5f1793ec0"
   solver-name = "gps-cdcl"
   solver-version = 1

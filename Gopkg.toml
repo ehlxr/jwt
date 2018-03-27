@@ -35,7 +35,7 @@
 
 [[constraint]]
   name = "github.com/manifoldco/promptui"
-  version = "0.2.1"
+  branch = "master"
 
 [[constraint]]
   branch = "master"
@@ -43,7 +43,7 @@
 
 [[constraint]]
   name = "github.com/spf13/cobra"
-  version = "0.0.1"
+  branch = "master"
 
 [[constraint]]
   name = "github.com/spf13/viper"
