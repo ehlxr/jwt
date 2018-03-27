@@ -31,9 +31,10 @@ import (
 // showCmd represents the show command
 var showCmd = &cobra.Command{
 	Use:   "show",
-	Short: "查看 JWT Token",
+	Short: "JWT Token 查看",
 	Long: `
-查看 JWT Token`,
+查看 JWT Token 内容
+标记 * 号的 flag 为必须项`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := token.ShowToken(cmd); err != nil {
 			fmt.Println(err)
@@ -45,5 +46,5 @@ var showCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(showCmd)
 
-	showCmd.Flags().StringP("token", "t", "", "path or arg of JWT token to verify, '-' to read from clipboard")
+	showCmd.Flags().StringP("token", "t", "", "* path or arg of JWT token to verify, '-' to read from clipboard")
 }

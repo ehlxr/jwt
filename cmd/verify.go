@@ -35,7 +35,8 @@ var verifyCmd = &cobra.Command{
 	Use:   "verify",
 	Short: "JWT token 验证",
 	Long: `
-JWT token 验证`,
+验证 JWT token 是否有效
+标记 * 号的 flag 为必须项`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := token.VerifyToken(cmd); err != nil {
 			fmt.Println(err)
@@ -47,6 +48,6 @@ JWT token 验证`,
 func init() {
 	rootCmd.AddCommand(verifyCmd)
 
-	verifyCmd.Flags().StringP("token", "t", "", "path or arg of JWT token to verify, '-' to read from clipboard")
-	verifyCmd.Flags().StringP("key", "k", "", "path of keyfile or key argument")
+	verifyCmd.Flags().StringP("token", "t", "", "* path or arg of JWT token to verify, '-' to read from clipboard")
+	verifyCmd.Flags().StringP("key", "k", "", "* path of keyfile or key argument")
 }

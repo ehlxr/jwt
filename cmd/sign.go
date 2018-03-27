@@ -33,7 +33,8 @@ var signCmd = &cobra.Command{
 	Use:   "sign",
 	Short: "JWT 签名",
 	Long: `
-JWT 签名`,
+签名 JWT token 并复制到剪切板
+标记 * 号的 flag 为必须项`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := token.SignToken(cmd); err != nil {
 			fmt.Println(err)
@@ -45,8 +46,8 @@ JWT 签名`,
 func init() {
 	rootCmd.AddCommand(signCmd)
 
-	signCmd.Flags().StringP("data", "d", "", "path or json to claims object to sign, '-' to read from clipboard, or '+' to use only -claim args")
-	signCmd.Flags().StringP("key", "k", "", "path of keyfile or key argument")
+	signCmd.Flags().StringP("data", "d", "", "* path or json to claims object to sign, '-' to read from clipboard, or '+' to use only -claim args")
+	signCmd.Flags().StringP("key", "k", "", "* path of keyfile or key argument")
 	signCmd.Flags().VarP(make(token.ArgList), "claims", "c", "add additional claims. may be used more than once")
 	signCmd.Flags().VarP(make(token.ArgList), "header", "H", "add additional header params. may be used more than once")
 }
