@@ -5,9 +5,13 @@
 
 # Install
 
+build with golang
+
 ```
 ➜ go get -u github.com/ehlxr/jwt
 ```
+
+or download [releases](https://github.com/ehlxr/jwt/releases) binary package.
 
 # Usage
 
