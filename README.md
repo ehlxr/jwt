@@ -3,6 +3,8 @@
 
 ![image](https://wx4.sinaimg.cn/large/687148dbly1fprjoxvd2gg213g0od7eq.gif)
 
+[more...](https://wx4.sinaimg.cn/large/687148dbly1fprk7dnqvsg213g0odx6s.gif)
+
 # Install
 
 build with golang
