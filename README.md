@@ -7,10 +7,18 @@
 
 # Install
 
-build with golang
+build with go get
 
 ```
 ➜ go get -u github.com/ehlxr/jwt
+```
+
+build with go [dep](https://github.com/golang/dep)
+
+```
+➜ git clone https://github.com/ehlxr/jwt.git
+
+➜ cd jwt && dep ensure
 ```
 
 or download [releases](https://github.com/ehlxr/jwt/releases) binary package.
