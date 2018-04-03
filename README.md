@@ -1,12 +1,7 @@
 # JWT
 > This is a simple tool to sign, verify and show JSON Web Tokens ([JWT](http://jwt.io/)) from the command line, base [jwt-go](https://github.com/dgrijalva/jwt-go).
 
-[![asciicast](https://asciinema.org/a/dywtXeCs6lnN0rLk6FfRLM5uo)](https://asciinema.org/a/dywtXeCs6lnN0rLk6FfRLM5uo)
-
-[![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
-
-
-[more...](https://wx4.sinaimg.cn/large/687148dbly1fprk7dnqvsg213g0odx6s.gif)
+[![jwt](https://asciinema.org/a/dywtXeCs6lnN0rLk6FfRLM5uo)](https://asciinema.org/a/dywtXeCs6lnN0rLk6FfRLM5uo)
 
 # Install
 
