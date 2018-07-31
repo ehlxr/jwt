@@ -26,7 +26,7 @@ build:
 install:
 	go install -ldflags "-s -w"
 
-release: amd64 386
+release: build_amd64 build_386 upx
 
 dep:
 	dep ensure
@@ -36,7 +36,7 @@ get_deps:
 
 clean:
 	go clean -i
-	rm -rf dist/jwt* jbls
+	rm -rf dist/jwt* jwt*
 
 build_amd64:
 	@ $(foreach OS,\
