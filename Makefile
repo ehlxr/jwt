@@ -1,4 +1,4 @@
-.PHONY: default init build install release dep get_deps clean build_amd64 build_386 upx
+.PHONY: default init common-build install release dep get_deps common-clean build_amd64 build_386 upx
 
 # https://golang.org/doc/install/source#environment
 GOOS := $(shell go env | awk -F= '$$1=="GOOS" {print $$2}' | awk -F '"' '{print $$2}') # 此处 awk 需使用两个 $
@@ -9,6 +9,11 @@ PKG =
 # 	GOARCH := $(strip $(GOARCH)).exe
 # endif
 
+# This rule is used to forward a target like "build" to "common-build".  This
+# allows a new "build" target to be defined in a Makefile which includes this
+# one and override "common-build" without override warnings.
+%: common-% ;
+
 default:
 	@echo "JWT info: please choose a target for 'make'"
 	@echo "available target: init build install release dep get_deps clean build_amd64 build_386 upx"
@@ -16,7 +21,7 @@ default:
 init: get-deps dep clean
 	go install -ldflags "-s -w"
 
-build:
+common-build:
 	@ go build -ldflags "-s -w" -o dist/jwt_$(strip $(GOOS))_$(strip $(if \
     $(findstring windows,$(GOOS)),\
     $(strip $(GOARCH)).exe,\
@@ -34,7 +39,7 @@ dep:
 get_deps:
 	go get -u github.com/golang/dep/cmd/dep
 
-clean:
+common-clean:
 	go clean -i
 	rm -rf dist/jwt* jwt*
 
