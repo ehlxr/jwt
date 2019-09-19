@@ -27,7 +27,7 @@ import (
 
 	"github.com/atotto/clipboard"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go"
 
 	"github.com/spf13/cobra"
 )
@@ -49,16 +49,16 @@ func SignToken(cmd *cobra.Command) error {
 	// get the token data from command line arguments
 	tokData, err := loadData(flagData)
 	if err != nil {
-		return fmt.Errorf("Couldn't read data: %v", err)
+		return fmt.Errorf("couldn't read data: %v", err)
 	} else if flagDebug {
-		fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
-		fmt.Fprintf(os.Stderr, "Token data: %v \n", string(tokData))
+		_, _ = fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
+		_, _ = fmt.Fprintf(os.Stderr, "Token data: %v \n", string(tokData))
 	}
 
 	// parse the JSON of the claims
 	var claims jwt.MapClaims
 	if err := json.Unmarshal(tokData, &claims); err != nil {
-		return fmt.Errorf("Couldn't parse claims JSON: %v", err)
+		return fmt.Errorf("couldn't parse claims JSON: %v", err)
 	}
 
 	// add command line claims
@@ -72,13 +72,13 @@ func SignToken(cmd *cobra.Command) error {
 	var key interface{}
 	key, err = loadData(flagKey)
 	if err != nil {
-		return fmt.Errorf("Couldn't read key: %v", err)
+		return fmt.Errorf("couldn't read key: %v", err)
 	}
 
 	// get the signing alg
 	alg := jwt.GetSigningMethod(flagAlg)
 	if alg == nil {
-		return fmt.Errorf("Couldn't find signing method alg: %v", flagAlg)
+		return fmt.Errorf("couldn't find signing method alg: %v", flagAlg)
 	}
 
 	// create a new token
@@ -93,7 +93,7 @@ func SignToken(cmd *cobra.Command) error {
 
 	if isEs(flagAlg) {
 		if k, ok := key.([]byte); !ok {
-			return fmt.Errorf("Couldn't convert key data to key")
+			return fmt.Errorf("couldn't convert key data to key")
 		} else {
 			key, err = jwt.ParseECPrivateKeyFromPEM(k)
 			if err != nil {
@@ -102,7 +102,7 @@ func SignToken(cmd *cobra.Command) error {
 		}
 	} else if isRs(flagAlg) {
 		if k, ok := key.([]byte); !ok {
-			return fmt.Errorf("Couldn't convert key data to key")
+			return fmt.Errorf("couldn't convert key data to key")
 		} else {
 			key, err = jwt.ParseRSAPrivateKeyFromPEM(k)
 			if err != nil {
@@ -113,9 +113,9 @@ func SignToken(cmd *cobra.Command) error {
 
 	if out, err := token.SignedString(key); err == nil {
 		fmt.Println(out)
-		clipboard.WriteAll(out)
+		_ = clipboard.WriteAll(out)
 	} else {
-		return fmt.Errorf("Error signing token: %v", err)
+		return fmt.Errorf("error signing token: %v", err)
 	}
 
 	return nil

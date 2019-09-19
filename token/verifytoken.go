@@ -25,7 +25,7 @@ import (
 	"os"
 	"regexp"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/cobra"
 )
 
@@ -45,13 +45,13 @@ func VerifyToken(cmd *cobra.Command) error {
 	// get the token
 	tokData, err := loadData(flagToken)
 	if err != nil {
-		return fmt.Errorf("Couldn't read token: %v", err)
+		return fmt.Errorf("couldn't read token: %v", err)
 	}
 
 	// trim possible whitespace from token
 	tokData = regexp.MustCompile(`\s*$`).ReplaceAll(tokData, []byte{})
 	if flagDebug {
-		fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
+		_, _ = fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
 	}
 
 	// Parse the token.  Load the key from command line option
@@ -70,23 +70,23 @@ func VerifyToken(cmd *cobra.Command) error {
 
 	// Print some debug data
 	if flagDebug && token != nil {
-		fmt.Fprintf(os.Stderr, "Header:\n%v\n", token.Header)
-		fmt.Fprintf(os.Stderr, "Claims:\n%v\n", token.Claims)
+		_, _ = fmt.Fprintf(os.Stderr, "Header:\n%v\n", token.Header)
+		_, _ = fmt.Fprintf(os.Stderr, "Claims:\n%v\n", token.Claims)
 	}
 
 	// Print an error if we can't parse for some reason
 	if err != nil {
-		return fmt.Errorf("Couldn't parse token: %v", err)
+		return fmt.Errorf("couldn't parse token: %v", err)
 	}
 
 	// Is token invalid?
 	if !token.Valid {
-		return fmt.Errorf("Token is invalid")
+		return fmt.Errorf("token is invalid")
 	}
 
 	// Print the token details
 	if err := printJSON(token.Claims, flagCompact); err != nil {
-		return fmt.Errorf("Failed to output claims: %v", err)
+		return fmt.Errorf("failed to output claims: %v", err)
 	}
 
 	return nil

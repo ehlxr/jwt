@@ -37,7 +37,7 @@ import (
 // Helper func:  Read input from specified file or string
 func loadData(p string) ([]byte, error) {
 	if p == "" {
-		return nil, fmt.Errorf("No path or arg specified")
+		return nil, fmt.Errorf("no path or arg specified")
 	}
 
 	var rdr io.Reader

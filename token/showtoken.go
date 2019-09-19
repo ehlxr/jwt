@@ -39,13 +39,13 @@ func ShowToken(cmd *cobra.Command) error {
 	// get the token
 	tokData, err := loadData(flagToken)
 	if err != nil {
-		return fmt.Errorf("Couldn't read token: %v", err)
+		return fmt.Errorf("couldn't read token: %v", err)
 	}
 
 	// trim possible whitespace from token
 	tokData = regexp.MustCompile(`\s*$`).ReplaceAll(tokData, []byte{})
 	if flagDebug {
-		fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
+		_, _ = fmt.Fprintf(os.Stderr, "Token len: %v bytes\n", len(tokData))
 	}
 
 	token, err := jwt.Parse(string(tokData), nil)
@@ -56,12 +56,12 @@ func ShowToken(cmd *cobra.Command) error {
 	// Print the token details
 	fmt.Println("Header:")
 	if err := printJSON(token.Header, flagCompact); err != nil {
-		return fmt.Errorf("Failed to output header: %v", err)
+		return fmt.Errorf("failed to output header: %v", err)
 	}
 
 	fmt.Println("Claims:")
 	if err := printJSON(token.Claims, flagCompact); err != nil {
-		return fmt.Errorf("Failed to output claims: %v", err)
+		return fmt.Errorf("failed to output claims: %v", err)
 	}
 
 	return nil
