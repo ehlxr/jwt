@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"jwt/token"
+	"github.com/ehlxr/jwt/token"
 	"github.com/spf13/cobra"
 )
 

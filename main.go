@@ -20,7 +20,7 @@
 
 package main
 
-import "jwt/cmd"
+import "github.com/ehlxr/jwt/cmd"
 
 func main() {
 	cmd.Execute()

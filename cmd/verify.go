@@ -23,7 +23,7 @@ package cmd
 import (
 	"os"
 
-	"jwt/token"
+	"github.com/ehlxr/jwt/token"
 
 	"fmt"
 
