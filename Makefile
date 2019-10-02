@@ -1,60 +1,48 @@
-.PHONY: default init common-build install release dep get_deps common-clean build_amd64 build_386 upx
+BUILD_VERSION   := $(shell cat version)
+BUILD_TIME		:= $(shell date "+%F %T")
+COMMIT_SHA1     := $(shell git rev-parse HEAD)
+ROOT_DIR    	:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))/
+DIST_DIR 		:= $(ROOT_DIR)/dist/
 
-# https://golang.org/doc/install/source#environment
-GOOS := $(shell go env | awk -F= '$$1=="GOOS" {print $$2}' | awk -F '"' '{print $$2}') # 此处 awk 需使用两个 $
-GOARCH := $(shell go env | awk -F= '$$1=="GOARCH" {print $$2}' | awk -F '"' '{print $$2}')
-OSS = darwin dragonfly freebsd linux netbsd openbsd plan9 solaris windows
-PKG =
-# ifeq ($(strip $(GOOS)), windows)
-# 	GOARCH := $(strip $(GOARCH)).exe
-# endif
+VERSION_PATH	   	:= $(shell cat `go env GOMOD` | awk '/^module/{print $$2}')/cmd
+LD_GIT_COMMIT      	:= -X '$(VERSION_PATH).GitCommit=$(COMMIT_SHA1)'
+LD_BUILD_TIME      	:= -X '$(VERSION_PATH).BuildTime=$(BUILD_TIME)'
+LD_GO_VERSION      	:= -X '$(VERSION_PATH).GoVersion=`go version`'
+LD_GATEWAY_VERSION	:= -X '$(VERSION_PATH).Version=$(BUILD_VERSION)'
+LD_FLAGS           	:= "$(LD_GIT_COMMIT) $(LD_BUILD_TIME) $(LD_GO_VERSION) $(LD_GATEWAY_VERSION) -w -s"
 
-# This rule is used to forward a target like "build" to "common-build".  This
-# allows a new "build" target to be defined in a Makefile which includes this
-# one and override "common-build" without override warnings.
-%: common-% ;
+.PHONY : build release clean install upx
 
-default:
-	@echo "JWT info: please choose a target for 'make'"
-	@echo "available target: init build install release dep get_deps clean build_amd64 build_386 upx"
+build:
+ifneq ($(shell type gox >/dev/null 2>&1;echo $$?), 0)
+	@echo "Can't find gox command, will start installation..."
+	GO111MODULE=off go get -v -u github.com/mitchellh/gox
+endif
+	# @$(if $(findstring 0,$(shell type gox >/dev/null 2>&1;echo $$?)),,echo "Can't find gox command, will start installation...";GO111MODULE=off go get -v -u github.com/mitchellh/gox)
+	gox -ldflags $(LD_FLAGS) -osarch="darwin/amd64 linux/386 linux/amd64 windows/amd64" \
+		-output="$(DIST_DIR){{.Dir}}_{{.OS}}_{{.Arch}}"
 
-init: get-deps dep clean
-	go install -ldflags "-s -w"
-
-common-build:
-	@ go build -ldflags "-s -w" -o dist/jwt_$(strip $(GOOS))_$(strip $(if \
-    $(findstring windows,$(GOOS)),\
-    $(strip $(GOARCH)).exe,\
-    $(strip $(GOARCH))\
-	))
+clean:
+	rm -rf $(DIST_DIR)*
 
 install:
-	go install -ldflags "-s -w"
-
-release: build_amd64 build_386 upx
-
-dep:
-	dep ensure
-
-get_deps:
-	go get -u github.com/golang/dep/cmd/dep
-
-common-clean:
-	go clean -i
-	rm -rf dist/jwt* jwt*
-
-build_amd64:
-	@ $(foreach OS,\
-	$(OSS),\
-	$(shell CGO_ENABLED=0 GOOS=$(OS) GOARCH=amd64 go build -ldflags "-s -w" -o dist/jwt_$(OS)_amd64$(if $(findstring windows,$(OS)),.exe)))
-	@ echo done
-
-build_386:
-	@ $(foreach OS,\
-	$(OSS),\
-	$(shell CGO_ENABLED=0 GOOS=$(OS) GOARCH=386 go build -ldflags "-s -w" -o dist/jwt_$(OS)_386$(if $(findstring windows,$(OS)),.exe)))
-	@ echo done
+	go install -ldflags $(LD_FLAGS)
 
 # 压缩。需要安装 https://github.com/upx/upx
 upx:
-	upx $(if $(PKG),$(PKG),dist/jwt*)
+	upx $(DIST_DIR)**
+
+release: build upx
+ifneq ($(shell type ghr >/dev/null 2>&1;echo $$?), 0)
+	@echo "Can't find ghr command, will start installation..."
+	GO111MODULE=off go get -v -u github.com/tcnksm/ghr
+endif
+	# @$(if $(findstring 0,$(shell type ghr >/dev/null 2>&1;echo $$?)),,echo "Can't find ghr command, will start installation...";GO111MODULE=off go get -v -u github.com/tcnksm/ghr)
+	ghr -u ehlxr -t $(GITHUB_RELEASE_TOKEN) -replace -delete --debug ${BUILD_VERSION} $(DIST_DIR)
+
+# this tells 'make' to export all variables to child processes by default.
+.EXPORT_ALL_VARIABLES:
+
+GO111MODULE = on
+GOPROXY = https://goproxy.cn,direct
+GOSUMDB = sum.golang.google.cn

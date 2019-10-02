@@ -37,7 +37,6 @@ var rootCmd = &cobra.Command{
 	Short: "JWT(Json Web Token) 工具",
 	Long: `JWT(Json Web Token) 工具
 用于生成、验证、查看 JWT`,
-	Version: "v0.0.2",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -54,7 +53,7 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.jwt.yaml)")
 	// rootCmd.Flags().BoolP("help", "h", false, "path to JWT token to verify or '-' to read from stdin")
-	rootCmd.Flags().BoolP("version", "v", false, "show version of the jwt.")
+	// rootCmd.Flags().BoolP("version", "v", false, "show version of the jwt.")
 }
 
 // initConfig reads in config file and ENV variables if set.
