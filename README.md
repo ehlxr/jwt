@@ -11,12 +11,12 @@ build with go get
 ➜ go get -u github.com/ehlxr/jwt
 ```
 
-build with go [dep](https://github.com/golang/dep)
+build with make
 
 ```
 ➜ git clone https://github.com/ehlxr/jwt.git
 
-➜ cd jwt && dep ensure
+➜ cd jwt && make install
 ```
 
 or download [releases](https://github.com/ehlxr/jwt/releases) binary package.
@@ -33,17 +33,37 @@ Usage:
 
 Available Commands:
   help        Help about any command
-  show        查看 JWT Token
+  show        JWT Token 查看
   sign        JWT 签名
   verify      JWT token 验证
+  version     Print version
 
 Flags:
       --config string   config file (default is $HOME/.jwt.yaml)
   -h, --help            help for jwt
-  -v, --version         show version of the jwt.
 
 Use "jwt [command] --help" for more information about a command.
 
+```
+
+## JWT version
+
+```
+➜ jwt version
+
+   __     __     __     ______
+  /\ \   /\ \  _ \ \   /\__  _\
+ _\_\ \  \ \ \/ ".\ \  \/_/\ \/
+/\_____\  \ \__/".~\_\    \ \_\
+\/_____/   \/_/   \/_/     \/_/
+
+
+
+Name: jwt
+Version: v1.0.2
+BuildTime: 2019-10-02 16:56:20
+GitCommit: c546aaaee1b6a6b03eabf396f9cab01718e22104
+GoVersion: go version go1.13.1 darwin/amd64
 ```
 
 ## sign JWT
