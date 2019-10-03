@@ -18,7 +18,7 @@ ifneq ($(shell type gox >/dev/null 2>&1;echo $$?), 0)
 	@echo "Can't find gox command, will start installation..."
 	GO111MODULE=off go get -v -u github.com/mitchellh/gox
 endif
-	# @$(if $(findstring 0,$(shell type gox >/dev/null 2>&1;echo $$?)),,echo "Can't find gox command, will start installation...";GO111MODULE=off go get -v -u github.com/mitchellh/gox)
+	@# $(if $(findstring 0,$(shell type gox >/dev/null 2>&1;echo $$?)),,echo "Can't find gox command, will start installation...";GO111MODULE=off go get -v -u github.com/mitchellh/gox)
 	gox -ldflags $(LD_FLAGS) -osarch="darwin/amd64 linux/386 linux/amd64 windows/amd64" \
 		-output="$(DIST_DIR){{.Dir}}_{{.OS}}_{{.Arch}}"
 
@@ -37,7 +37,7 @@ ifneq ($(shell type ghr >/dev/null 2>&1;echo $$?), 0)
 	@echo "Can't find ghr command, will start installation..."
 	GO111MODULE=off go get -v -u github.com/tcnksm/ghr
 endif
-	# @$(if $(findstring 0,$(shell type ghr >/dev/null 2>&1;echo $$?)),,echo "Can't find ghr command, will start installation...";GO111MODULE=off go get -v -u github.com/tcnksm/ghr)
+	@# $(if $(findstring 0,$(shell type ghr >/dev/null 2>&1;echo $$?)),,echo "Can't find ghr command, will start installation...";GO111MODULE=off go get -v -u github.com/tcnksm/ghr)
 	ghr -u ehlxr -t $(GITHUB_RELEASE_TOKEN) -replace -delete --debug ${BUILD_VERSION} $(DIST_DIR)
 
 # this tells 'make' to export all variables to child processes by default.
