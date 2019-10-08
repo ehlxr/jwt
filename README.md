@@ -129,6 +129,6 @@ Global Flags:
 
 ## Thanks to the following organizations for providing open source licenses
 
-[<img src="./assets/jetbrains.png" width = "200" height = "217" alt="图片名称" align=center />](https://www.jetbrains.com/?from=jwt)
+[<img src="https://cdn.ehlxr.top/jetbrains.png" width = "200" height = "217" alt="图片名称" align=center />](https://www.jetbrains.com/?from=jwt)
 
 
