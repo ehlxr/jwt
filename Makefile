@@ -37,7 +37,6 @@ upx:
 	@# 在命令前面加上“-”，表示不管该命令出不出错，后面的命令都将继续执行下去
 	@# -upx $(DIST_DIR)**
 	upx $(DIST_DIR)**
-	echo "sdfs"
 
 release: build upx
 ifneq ($(shell type ghr >/dev/null 2>&1;echo $$?), 0)
