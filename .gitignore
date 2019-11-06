@@ -17,3 +17,4 @@ jwt*
 dist
 .vscode
 test
+go.sum
