@@ -61,9 +61,9 @@ Use "jwt [command] --help" for more information about a command.
 
 Name: jwt
 Version: v1.0.2
-BuildTime: 2019-10-02 16:56:20
-GitCommit: c546aaaee1b6a6b03eabf396f9cab01718e22104
-GoVersion: go version go1.13.1 darwin/amd64
+BuildTime: 2019-11-20 17:35:50
+GitCommit: 2293dd91c1763169bb7a2d8d27120216a1f8c4b8
+GoVersion: go version go1.13.4 darwin/amd64
 ```
 
 ## sign JWT
