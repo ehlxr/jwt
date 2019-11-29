@@ -1,9 +1,9 @@
 # JWT
 
 [![license](https://badgen.net/badge/license/MIT/blue)](./LICENSE)
-![](https://badgen.net/github/commits/ehlxr/jwt)
-![](https://badgen.net/github/last-commit/ehlxr/jwt)
-![](https://badgen.net/github/releases/ehlxr/jwt)
+[![](https://badgen.net/github/commits/ehlxr/jwt)](https://github.com/ehlxr/jwt/commits/)
+[![](https://badgen.net/github/last-commit/ehlxr/jwt)]((https://github.com/ehlxr/jwt/commits/))
+[![](https://badgen.net/github/releases/ehlxr/jwt)](https://github.com/ehlxr/jwt/releases)
 
 > This is a simple tool to sign, verify and show JSON Web Tokens ([JWT](http://jwt.io/)) from the command line, base [jwt-go](https://github.com/dgrijalva/jwt-go).
 
