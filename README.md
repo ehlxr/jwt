@@ -11,13 +11,13 @@
 
 # Install
 
-build with go get
+## build with go get
 
 ```
 ➜ go get -u github.com/ehlxr/jwt
 ```
 
-build with make
+## build with make
 
 ```
 ➜ git clone https://github.com/ehlxr/jwt.git
