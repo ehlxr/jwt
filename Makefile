@@ -38,7 +38,7 @@ upx:
 	@# -upx $(DIST_DIR)**
 	upx $(DIST_DIR)**
 
-release: build upx
+release:
 ifneq ($(shell type ghr >/dev/null 2>&1;echo $$?), 0)
 	@echo "Can't find ghr command, will start installation..."
 	cd ~ && go get -v -u github.com/tcnksm/ghr && cd $(ROOT_DIR)
